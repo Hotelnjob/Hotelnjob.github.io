@@ -35,7 +35,7 @@ export default function Calendar() {
     const [employeeId, setEmployeeId] = useState("");
     const [employeeName, setEmployeeName] = useState("");
     const user = JSON.parse(sessionStorage.getItem("user"));
-    
+
     // 일정 목록 가져오기
     const fetchEvents = () => {
         customFetch({ path: "/calendar/list", method: "GET" }).then((res) => {
@@ -47,13 +47,13 @@ export default function Calendar() {
                         title: event.title,  // 이벤트 제목
                         description: event.description,  // 이벤트 설명
                         start: event.startDate,  // 시작 날짜
-                        end:new Date(event.endDate),  // 종료 날짜
+                        end: new Date(event.endDate),  // 종료 날짜
                         extendedProps: {
                             description: event.description,  // 추가 정보는 extendedProps에 포함
                             employeeName: event.employeeName,
                             empmployeeId: event.employeeId,
-                        }, 
-                        
+                        },
+
                     }));
                     setSchedules(events);  // 상태 업데이트
                 });
@@ -61,18 +61,18 @@ export default function Calendar() {
         });
     };
 
-     // 새 일정 추가
+    // 새 일정 추가
     const addEvent = () => {
         setSelectedEvent(null);
         const newEvent = {
-            id:uuidv4(),
+            id: uuidv4(),
             title: newEventTitle,
             description: newEventDescription,
             startDate: startDate,
             endDate: endDate,
             employeeId: user.id,
             employeeName: user.name,
-            
+
         };
         customFetch({ path: "/calendar/register", method: "POST", body: JSON.stringify(newEvent) }).then((res) => {
             if (res.status === 200) {
@@ -95,8 +95,8 @@ export default function Calendar() {
         setModalOpen(true);
     };
 
-   
-    
+
+
 
     // 날짜 클릭 시 모달 열기
     const openModal = (info) => {
@@ -104,7 +104,7 @@ export default function Calendar() {
         setSelectedDate(info.dateStr); // 클릭한 날짜 저장
         setStartDate(info.dateStr); // 클릭한 날짜를 startDate로 설정
         setEndDate(info.dateStr); // 종료 날짜도 시작 날짜와 동일하게 설정 (필요에 따라 조정)
-    setModalOpen(true);
+        setModalOpen(true);
     };
 
     // 모달 닫기
@@ -119,16 +119,16 @@ export default function Calendar() {
         setSelectedEvent(null);  // 모달을 닫을 때 selectedEvent 초기화
     };
 
-    
+
 
     useEffect(() => {
-        console.log('스케줄 조회',schedules);
+        console.log('스케줄 조회', schedules);
         fetchEvents();
     }, []);
 
     return (
         <MainCard>
-            <div><h2>Schedules</h2></div>
+            <div><h2>일정</h2></div>
             <div id="calendar-container">
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
@@ -143,7 +143,7 @@ export default function Calendar() {
                     events={schedules}
                     dateClick={openModal} // 날짜 클릭 시 openModal 호출
                     eventClick={handleEventClick}  // 이벤트 클릭 핸들러 등록
-                      
+
                     displayEventTime={false}
                 />
             </div>
