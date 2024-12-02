@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 'main' 브랜치에 푸시될 때 배포
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  # Node.js 버전 설정
+
+    - name: Install dependencies
+      run: npm install  # 의존성 설치
+
+    - name: Build the project
+      run: npm run build  # Vite 빌드 실행
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token 사용
+        publish_dir: ./dist 
+        publish_branch: main  

@@ -1,0 +1,79 @@
+.kanban-board {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.column {
+    width: 30%;
+    padding: 10px;
+    background-color: hsl(0, 0%, 100%);
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 컨테이너 스타일 */
+.title-container {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: black;
+}
+
+/* 각 열 제목의 배경색 */
+.title-container.대기 {
+    background-color: #fadcc0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* to-do 제목 배경색 */
+}
+
+.title-container.진행 {
+    background-color: #cee6ff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* in-progress 제목 배경색 */
+}
+
+.title-container.완료 {
+    background-color: hsl(101, 100%, 86%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* done 제목 배경색 */
+}
+
+.task {
+    background-color: #fff;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.task:hover {
+    background-color: #e3f2fd;
+}
+
+.task-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.task-todo {
+    white-space: pre-wrap;
+    color: #555;
+}
+
+.task-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.task-writer {
+    font-weight: bold;
+    text-align: left;
+}
