@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
     build: {
       chunkSizeWarningLimit: 2500,
     },
-    base: '/', // Hard coding the base path here
+    base: '/hotelnjob.github.io/', // Hard coding the base path here
     define: {
       global: 'window',
     },
