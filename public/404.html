@@ -6,7 +6,13 @@
     <script>
         // GitHub Pages에서 새로고침 시 경로 리디렉션
         var path = window.location.pathname + window.location.search + window.location.hash;
-        window.location.replace('/#' + path);
+        // 경로에 '#/'를 추가하여 리디렉션
+        if (path.startsWith('/')) {
+            path = '#' + path; // 기존 경로에 # 추가
+        } else {
+            path = '#/' + path; // 루트에서 시작하도록 설정
+        }
+        window.location.replace(path);
     </script>
 </head>
 
