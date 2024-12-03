@@ -9,7 +9,8 @@ import { koKR } from '@mui/x-data-grid/locales';
 import { Box } from "@mui/system";
 import { hotelColumn } from "pages/hotel/hotel-colums";
 import { workerColumn } from "pages/worker/worker-column";
-import { historyColumn } from "./history-column";
+import { workerHistoryColumn } from "./worker-history-column";
+import { hotelHistoryColumn } from "./hotel-history-column";
 
 
 
@@ -17,6 +18,7 @@ export default function WorkHistoryManage() {
   const [hotelRows, setHotelRows] = useState([]);
   const [workerRows, setWorkerRows] = useState([]);
   const [historyRows, setHistoryRows] = useState([]);
+  const [columns, setColumns] = useState(workerHistoryColumn)
 
   const searchHotel = () => {
     customFetch({ path: "/hotel/list", method: "GET" }).then((res) => {
@@ -44,6 +46,7 @@ export default function WorkHistoryManage() {
       if (res.status == 200) {
         res.json().then((result) => {
           console.log(result);
+          setColumns(isHotel ? hotelHistoryColumn : workerHistoryColumn);
           setHistoryRows([...result]);
         })
       }
@@ -148,7 +151,7 @@ export default function WorkHistoryManage() {
         <Box sx={{ height: '100%', width: '100%' }}>
           <DataGrid
             rows={historyRows}
-            columns={historyColumn}
+            columns={columns}
             initialState={{
               density: "compact",
               pagination: {
